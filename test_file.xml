@@ -1,0 +1,81 @@
+<Blueprint name = "TEST">
+	<Application name = "TEST"  root ="TEST_VAR" robot_dir="A01">
+		<Version value = "1.1.27">
+			<LoadOrder>
+				<Parameter name = "$A" type = "INTEGER" value = "1"/>
+
+				<Parameter name = "$B">
+					<Parameter name = "$BB" type = "INTEGER" value = "1"/>
+				</Parameter>
+
+				<Parameter name = "$C" type = "ARRAY OF STRING">
+					<!--Setup BMW instruction Menu -->
+					<Member name = "1" type = "STRING" value = "CC1"/>
+					<Member name = "2" type = "STRING" value = "CC2"/>
+				</Parameter>
+
+				<Parameter name = "$D" type = "ARRAY OF STRUCTURE">
+					<Member name = "1">
+						<Parameter name = "$DD1" type = "STRING" value = "DD1"/>
+						<Parameter name = "$DD2" type = "INTEGER" value = "1"/>
+					</Member>
+				</Parameter>
+
+				<Parameter name = "$E" type = "ARRAY OF STRUCTURE">
+					<Member name = "1">
+						<Parameter name = "$E" type = "ARRAY OF REAL">
+							<Member name = "1" type = "REAL" value = "1"/>
+							<Member name = "2" type = "REAL" value = "1"/>
+						</Parameter>
+					</Member>
+				</Parameter>
+
+				<!--system variable settings-->
+				<External name = "[*SYSTEM*]">
+					<Parameter name = "$A" type = "INTEGER" value = "1"/>
+
+					<Parameter name = "$B">
+						<Parameter name = "$BB" type = "INTEGER" value = "1"/>
+					</Parameter>
+
+					<Parameter name = "$C" type = "ARRAY OF STRING">
+						<!--Setup BMW instruction Menu -->
+						<Member name = "1" type = "STRING" value = "CC1"/>
+						<Member name = "2" type = "STRING" value = "CC2"/>
+					</Parameter>
+
+					<Parameter name = "$D" type = "ARRAY OF STRUCT">
+						<Member name = "1">
+							<Parameter name = "$DD1" type = "STRING" value = "DD1"/>
+							<Parameter name = "$DD2" type = "INTEGER" value = "1"/>
+						</Member>
+					</Parameter>
+
+
+					<Parameter name = "$E" type = "ARRAY OF STRUCT">
+						<Member name = "1">
+							<Parameter name = "$E" type = "ARRAY OF REAL">
+								<Member name = "1" type = "REAL" value = "1"/>
+								<Member name = "2" type = "REAL" value = "1"/>
+							</Parameter>
+						</Member>
+					</Parameter>
+
+				</External>
+			</LoadOrder>
+
+
+			<!--Translations-->
+			<!--Example:-->
+			<Translation old = "[A01_cmn_var]strukturA[3].VarNameOld" new = "[A01_cmn_var]strukturB[12].VarNameNew" />
+			<Translation old = "[A01_cmn_mon]VarA" new = "[A01_cmn_var]VarB" />
+
+			<!--non adjustable constants-->
+			<Const>
+				<Parameter name ="abc" type = "BOOLEAN"  value = "FALSE"/>
+			</Const>
+			<!--If cell has a rail unit then TRUE (need to set by the tool)-->
+			<Parameter name ="abc" type = "BOOLEAN"  default = "FALSE"/>
+		</Version>
+	</Application>
+</Blueprint>

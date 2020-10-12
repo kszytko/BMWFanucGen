@@ -1,0 +1,1596 @@
+<!--blueprint version = max application version-->
+<!-- 2DO:-->
+<!--   - -->
+<!--   - variables for dynamic IO -->
+<!--   - default values and range for all settings-->
+<!--   - check if more variables need to be initialized-->
+<!--   - set st_version with "%myversion%" if this is available in ICU-->
+<Blueprint name = "A01_CMN">
+  <Application name = "A01_CMN"  root ="A01_CMN_VAR" robot_dir="A01">
+
+    <Version value = "1.1.27">
+      <!--value name application revisions-->
+      <LoadOrder>
+        <!--dictionary files-->
+        <File name = "A01\forms\vr\GUIE.vr" location = "MD:" comment = "GUIE" type = "VARIABLE"/>
+        <File name = "A01\forms\vr\Home.vr" location = "MD:" comment = "Home" type = "VARIABLE"/>
+        <File name = "A01\forms\vr\MSGO.vr" location = "MD:" comment = "MSGO" type = "VARIABLE"/>
+        <File name = "A01\forms\vr\back.vr" location = "MD:" comment = "BACK" type = "VARIABLE"/>
+        <File name = "A01\forms\tx\A1GUIEEG.tx" location = "MD:" comment ="GUIE" type = "DICTIONARY"/>
+        <File name = "A01\forms\tx\A1HomeEG.tx" location = "MD:" comment ="Home" type = "DICTIONARY"/>
+        <File name = "A01\forms\tx\A1MSGOEG.tx" location = "MD:" comment ="MSGO" type = "DICTIONARY"/>
+        <File name = "A01\forms\tx\01BACKEG.tx" location = "MD:" comment ="BACK" type = "DICTIONARY"/>
+        <!--application files-->
+        <File name = "A01\PC\A01_cmn_gui.pc" location = "MD:" comment = "A01_cmn_gui" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_cmn_lub.pc" location = "MD:" comment = "A01_cmn_lub" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_cmn_err.pc" location = "MD:" comment = "A01_cmn_err" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_cmn_man.pc" location = "MD:" comment = "A01_cmn_man" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_cmn_menu.pc" location = "MD:" comment = "A01_cmn_menu" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_cmn_mon.pc" location = "MD:" comment = "A01_cmn_mon" type = "KAREL" monitoring = "TRUE"/>
+        <File name = "A01\PC\A01_cmn_Ev.pc" location = "MD:" comment = "A01_cmn_Ev" type = "KAREL" monitoring = "TRUE"/>
+        <File name = "A01\PC\A01_cmn_rout.pc" location = "MD:" comment = "A01_cmn_rout" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\BreakTest.pc" location = "MD:" comment ="BreakTest" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\cmn_InitAuto.pc" location = "MD:" comment ="cmn_InitAuto" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\ComLubri.pc" location = "MD:" comment ="ComLubri" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\Lib_UDP.pc" location = "MD:" comment ="Lib_UDP" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\MessageDisp.pc" location = "MD:" comment ="MessageDisp" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\SelectMain.pc" location = "MD:" comment ="SelectMain" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\SendUDPT.pc" location = "MD:" comment ="SendUDPT" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\TaskATPOff.pc" location = "MD:" comment ="TaskATPOff" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\CMN.pc" location = "MD:" comment ="CMN" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\CMN_P.pc" location = "MD:" comment ="CMN_P" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\ClearRegister.pc" location = "MD:" comment ="ClearRegister " type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\SUPAPPLIST.pc" location = "MD:" comment ="SUPAPPLIST" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\SUPSETUPMENU.pc" location = "MD:" comment ="SUPSETUPMENU" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\SUPSTATMENU.pc" location = "MD:" comment ="SUPSTATMENU" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_bck_rout.pc" location = "MD:" comment ="BMW BACKUP" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_bck_task.pc" location = "MD:" comment ="BACKUP TASK" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_bck_vers.pc" location = "MD:" comment ="BACKUP VERSION" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\PNPED9mainW.pc" location = "MD:" comment ="ProfiEnergy" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\PNPED9utilW.pc" location = "MD:" comment ="ProfiEnergy" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_zip_rout.pc" location = "MD:" comment ="ZIP LIBRARY" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\supactframes.pc" location = "MD:" comment ="Frames Popup" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_cmn_kill.pc" location = "MD:" comment ="xmlKiller" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_cmn_var.pc" location = "MD:" comment ="A01_cmn_var" type = "KAREL" monitoring = "FALSE"/>
+
+        <!--TP programs-->
+        <File name = "A01\TP\ABORTHOME_1.ls" location = "MD:" comment ="ABORTHOME_1" type = "LS"/>
+        <File name = "A01\TP\ABORTHOME_2.ls" location = "MD:" comment ="ABORTHOME_2" type = "LS"/>
+        <File name = "A01\TP\ABORTHOME_3.ls" location = "MD:" comment ="ABORTHOME_3" type = "LS"/>
+        <File name = "A01\TP\ABORTHOME_4.ls" location = "MD:" comment ="ABORTHOME_4" type = "LS"/>
+        <File name = "A01\TP\ABORTHOME_5.ls" location = "MD:" comment ="ABORTHOME_5" type = "LS"/>
+        <File name = "A01\TP\GO_HOME.ls" location = "MD:" comment ="GO_HOME" type = "LS"/>
+        <File name = "A01\TP\INIT_AFTER_HOME.ls" location = "MD:" comment ="INIT_AFTER_HOME" type = "LS" overwrite = "false"/>
+        <File name = "A01\TP\INIT_BEFORE_HOME.ls" location = "MD:" comment ="INIT_BEFORE_HOME" type = "LS" overwrite = "false"/>
+        <File name = "A01\TP\INIT_PRODUCTION.ls" location = "MD:" comment ="INIT_PRODUCTION" type = "LS" overwrite = "false"/>
+        <File name = "A01\TP\INITAPP.ls" location = "MD:" comment ="INITAPP" type = "LS" overwrite = "false"/>
+        <File name = "A01\TP\INITPROGRAM.ls" location = "MD:" comment ="INITPROGRAM" type = "LS" overwrite = "false"/>
+        <File name = "A01\TP\MAIN.ls" location = "MD:" comment ="MAIN" type = "LS"/>
+        <File name = "A01\TP\PROG251.ls" location = "MD:" comment ="PROG251" type = "LS"/>
+
+        <!--argument wizard-->
+        <File name = "A01\config\ARGDISPEG01.dt" location = "FR:" comment = "ARGDISPEG01" type = "DT"/>
+
+        <!--additional files-->
+        <File name = "A01\config\A01_cmn_err.csv" location = "FR:" comment = "A01_cmn_err" type = "CSV"/>
+        <File name = "A01\config\a01.xml" location = "FR:" comment = "a01" type = "XML"/>
+        <File name = "A01\config\a01.cvr" location = "FR:" comment = "a01" type = "CVR"/>
+        <File name = "A01\config\SupBMWManBut.xml" location = "FR:" comment = "SupBMWManBut" type = "XML"/>
+        <File name = "A01\config\FramesInfo.xml" location = "FR:" comment = "FramesInfo" type = "XML"/>
+        <File name = "A01\config\gif\Exit.gif" comment = "" location = "FR:\gif\" type = "GIF"/>
+        <File name = "A01\config\gif\Logo.gif" comment = "" location = "FR:\gif\" type = "GIF"/>
+        <File name = "A01\config\gif\Null.gif" comment = "" location = "FR:\gif\" type = "GIF"/>
+        <File name = "A01\config\gif\Next.gif" comment = "" location = "FR:\gif\" type = "GIF"/>
+        <File name = "A01\config\gif\Prev.gif" comment = "" location = "FR:\gif\" type = "GIF"/>
+        <File name = "A01\config\dot.xml" location = "FR:" comment = "dot" type = "XML"/>
+        <File name = "A01\config\DCS.CVR" location = "FR:" comment = "DCS" type = "CVR"/>
+        <File name = "A01\config\Workbook.CVR" location = "FR:" comment = "Workbook" type = "CVR"/>
+        <File name = "A01\config\RobotDataDefinition.CVR" location = "FR:" comment = "RobotDataDefinition" type = "CVR"/>
+        <File name = "A01\config\bmwmenu.as" location = "FRSU:" comment = "BMW Menu" type = "AS"/>
+        <File name = "A01\config\password.dt" location = "MD:" comment = "password" type = "DT"/>
+        <File name = "A01\config\syspass.sv" location = "MD:" comment = "syspass" type = "SV"/>
+
+        <!--settings in root variable file (A01_CMN_VAR)-->
+        <Parameter name = "ar_apps" type = "ARRAY OF STRUCTURE">
+          <Member name = "1">
+            <Parameter name = "A" type = "STRUCTURE">
+              <Parameter name = "b_installed" type = "BOOLEAN" value = "TRUE"/>
+              <Parameter name = "st_version" type = "STRING" value = "1.1.27"/>
+            </Parameter>
+          </Member>
+        </Parameter>
+
+        <!--Setting FAP version to Utilities screen -->
+        <Parameter name = "st_InstalledFapVersion" type = "STRING" value = "FAP 1.1.27"/>
+        <Parameter name = "i_RequiredSystemVersion" type = "INTEGER" value = "8002"/>
+        <!--settings in external variable file-->
+        <!--example:-->
+        <!--External name = "[A01_CMN_MON]">
+                    <Parameter name = "Ex1" type = "ARRAY OF INTEGER">
+                        <Member name = "1">
+                            <Parameter name = "i_Example" type = "INTEGER" value = "5"/>
+                        </Member>
+                    </Parameter>
+                </External-->
+
+        <!--system variable settings-->
+        <External name = "[*SYSTEM*]">
+
+          <Parameter name ="$OPWORK">
+            <!--Enable UI signals from config menu-->
+            <Parameter name ="$UOP_DISABLE" type = "INTEGER"  value = "0"/>
+          </Parameter>
+
+          <!--Enable Argument Wizard functionality -->
+          <!--0 = Wizard to input arguments is disabled -->
+          <!--1 = Wizard to input arguments is enabled (Default) -->
+          <!--2 = Wizard to input arguments is enabled and the value of macro definition is displayed -->
+          <Parameter name = "$ARGDISPMODE" type = "INTEGER" value = "1"/>
+
+          <Parameter name ="$UI_CONFIG">
+            <!--Robotercomment auf TP (need to set by the tool)-->
+            <Parameter name ="$DSP_NAME" type = "STRING"  default = ""/>
+            <!--disable the screensaver-->
+            <Parameter name ="$BLNK_ENABLE" type = "BOOLEAN"  value = "FALSE"/>
+            <!--disable the touch beep-->
+            <Parameter name ="$TOUCH_BEEP" type = "BOOLEAN"  value = "FALSE"/>
+          </Parameter>
+
+          <!--switch off Autobackup -->
+          <Parameter name = "$AUTOBACKUP">
+            <!--enable switch -->
+            <Parameter name = "$ENABLE" type = "BOOLEAN" value = "FALSE"/>
+          </Parameter>
+
+          <!--Add additional files from FR to AoA/Autobackup -->
+          <Parameter name = "$FILE_APPBCK">
+           <!--XML Files -->
+            <Member name = "20">
+              <Parameter name = "$FILE_NAME" type = "STRING" value = "*.XML"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "FR:*.XML"/>
+              <Parameter name = "$FUNC_CODE" type = "INTEGER" value = "11"/>
+              <Parameter name = "$MODIFIER" type = "INTEGER" value = "0"/>
+              <Parameter name = "$COMMENT" type = "STRING" value = "BMW_XML_FILES"/>
+              <Parameter name = "$FUNC_PTR" type = "INTEGER" value = "0"/>
+            </Member>
+            <!--GIF Files -->
+            <Member name = "21">
+              <Parameter name = "$FILE_NAME" type = "STRING" value = "*.GIF"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "FR:\\GIF\\*.GIF"/>
+              <Parameter name = "$FUNC_CODE" type = "INTEGER" value = "11"/>
+              <Parameter name = "$MODIFIER" type = "INTEGER" value = "0"/>
+              <Parameter name = "$COMMENT" type = "STRING" value = "BMW_GIF_FILES"/>
+              <Parameter name = "$FUNC_PTR" type = "INTEGER" value = "0"/>
+            </Member>
+            <!--CSV Files -->
+            <Member name = "22">
+              <Parameter name = "$FILE_NAME" type = "STRING" value = "*.CSV"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "FR:*.CSV"/>
+              <Parameter name = "$FUNC_CODE" type = "INTEGER" value = "11"/>
+              <Parameter name = "$MODIFIER" type = "INTEGER" value = "0"/>
+              <Parameter name = "$COMMENT" type = "STRING" value = "BMW_CSV_FILES"/>
+              <Parameter name = "$FUNC_PTR" type = "INTEGER" value = "0"/>
+            </Member>
+          </Parameter>
+
+          <!--Check simulated DO -->
+          <Parameter name = "$OUT_SIM_DO" type = "INTEGER" value = "517"/>
+          <!--Check simulated DI -->
+          <Parameter name = "$INPT_SIM_DO" type = "INTEGER" value = "518"/>
+          <!--Check override-->
+          <Parameter name = "$GENOVRD_DO" type = "INTEGER" value = "423"/>
+          <!--No simulation of Singnals in Automode-->
+          <Parameter name = "$AUTOMODE_DO" type = "BOOLEAN" value = "FALSE"/>
+
+          <!--IO comments for summary.dg 0 = activeted, 1 = deactivated -->
+          <Parameter name = "$IO_CMT_OPT" type = "INTEGER" value = "0"/>
+
+          <!--Profinet-->
+          <Parameter name = "$PNG2_CFG">
+            <!--number of availables I/Os -->
+            <Parameter name = "$C_DI_PRT" type = "INTEGER" value = "4096"/>
+            <Parameter name = "$C_DO_PRT" type = "INTEGER" value = "4096"/>
+            <Parameter name = "$D_DI_PRT" type = "INTEGER" value = "4096"/>
+            <Parameter name = "$D_DO_PRT" type = "INTEGER" value = "4096"/>
+            <Parameter name = "$TRC_ENABLE" type = "INTEGER" value = "0"/>
+            <Parameter name = "$TRC_TIME" type = "INTEGER" value = "1"/>
+            <Parameter name = "$TRC_DEST" type = "INTEGER" value = "1"/>
+            <Parameter name = "$TRC_DEPTH" type = "INTEGER" value = "9"/>
+            <Parameter name = "$TRC_GROUP" type = "INTEGER" value = "65663"/>
+            <Parameter name = "$TRC_FILE" type = "STRING" value = "UD1:\PNIOTRC.TXT"/>
+
+          </Parameter>
+          <Parameter name = "$PNG2_CFG2">
+            <!--additional ProfiNet Info Screen -->
+            <Parameter name = "$USHORT5" type = "INTEGER" value = "8"/>
+            <!--enable attach/detach from KAREL -->
+            <!--Parameter name = "$USHORT6" type = "INTEGER" value = "15"/-->
+          </Parameter>
+          <Parameter name = "$PNIO_POFF">
+            <Parameter name = "$ENABLE" type = "BOOLEAN" value = "TRUE"/>
+            <Parameter name = "$CUSTOM" type = "INTEGER" value = "2"/>
+            <Parameter name = "$TIMER1" type = "INTEGER" value = "300"/>
+            <Parameter name = "$TIMER2" type = "INTEGER" value = "25"/>
+            <Parameter name = "$NSI_PORT" type = "INTEGER" value = "32"/>
+          </Parameter>
+
+          <!--amount of tasks and frames-->
+          <Parameter name = "$SCR">
+            <Parameter name = "$MAXNUMTASK" type = "INTEGER" value = "28"/>
+            <Parameter name = "$MAXNUMUFRAM" type = "INTEGER" value = "61"/>
+            <Parameter name = "$MAXNUMUTOOL" type = "INTEGER" value = "29"/>
+          </Parameter>
+
+          <!--DNS-->
+          <Parameter name = "$DNS_CFG">
+            <Parameter name = "$RETRIES" type = "INTEGER" value = "2"/>
+            <Parameter name = "$WAIT_TIME" type = "INTEGER" value = "2"/>
+            <!--Parameter name = "$ENABLE" type = "BOOLEAN" value = "TRUE"/-->
+          </Parameter>
+
+          <!--NTP-->
+          <Parameter name = "$SNTP_CFG">
+            <Parameter name = "$TIME_WIN" type = "INTEGER" value = "4"/>
+            <!--Timezone setting-->
+            <Parameter name ="$TZ_INDEX" type = "INTEGER"  value = "14" />
+            <Parameter name ="$ENABLE" type = "BOOLEAN" value = "TRUE" />
+            <!--Timezone offset setting-->
+            <Parameter name ="$TZ_OFFSET" type = "INTEGER"  value = "60" />
+            <Parameter name ="$CUR_OFFSET" type = "INTEGER" value = "120" />
+          </Parameter>
+
+          <!--general IP settings-->
+          <Parameter name = "$HOSTENT">
+            <Member name = "17">
+              <Parameter name = "$H_NAME" type = "STRING" value = "QUICC0"/>
+              <Parameter name = "$H_ADDRTYPE" type = "INTEGER" value = "2"/>
+              <Parameter name = "$H_LENGTH" type = "INTEGER" value = "4"/>
+            </Member>
+            <Member name = "18">
+              <Parameter name = "$H_NAME" type = "STRING" value = "QUICC1"/>
+              <Parameter name = "$H_ADDRTYPE" type = "INTEGER" value = "2"/>
+              <Parameter name = "$H_LENGTH" type = "INTEGER" value = "4"/>
+            </Member>
+            <Member name = "20">
+              <Parameter name = "$H_NAME" type = "STRING" value = "ROUTER"/>
+              <Parameter name = "$H_ADDRTYPE" type = "INTEGER" value = "2"/>
+              <Parameter name = "$H_LENGTH" type = "INTEGER" value = "4"/>
+            </Member>
+          </Parameter>
+
+          <!--amount of payloads-->
+          <Parameter name = "$PLST_SCHNUM" type = "INTEGER" value = "29"/>
+
+          <!-- Top Menu screen disable (TBC) -->
+          <Parameter name = "$UI_CONFIG.$ENB_TOPMENU" type = "BOOLEAN" value = "FALSE"/>
+
+          <!--karel background tasks-->
+          <Parameter name = "$KRLCFG">
+            <Member name = "1">
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "A01_CMN_MON"/>
+              <Parameter name = "$AUTOSTART" type = "BOOLEAN" value = "TRUE"/>
+              <Parameter name = "$MODESET" type = "INTEGER" value = "2"/>
+              <Parameter name = "$DO1_NUM" type = "INTEGER" value = "434"/>
+              <Parameter name = "$DO2_NUM" type = "INTEGER" value = "435"/>
+              <Parameter name = "$STAT_ENB" type = "BOOLEAN" value = "TRUE"/>
+              <Parameter name = "$OUTPUT_ALM" type = "BOOLEAN" value = "TRUE"/>
+            </Member>
+          </Parameter>
+
+          <!--AUTO conformation Signal-->
+          <Parameter name = "$DCS_CFG">
+            <Parameter name = "$AUTOCNF_IDX" type = "INTEGER" value = "428"/>
+          </Parameter>
+          <!--Setup DEADMAN SWITCH automatic reset function -->
+          <Parameter name = "$DMAURST" type = "BOOLEAN" value = "TRUE"/>
+          <!--Karel Callback Conf -->
+          <Parameter name = "$PRCALL_CONF" type = "STRUCTURE">
+            <Parameter name = "$PRCALL_ENB" type = "BOOLEAN" value = "TRUE"/>
+          </Parameter>
+          <!--Jog limit override -->
+          <Parameter name = "$SCR" type = "STRUCTURE">
+            <Parameter name = "$JOGOVLIM" type = "INTEGER" value = "100"/>
+          </Parameter>
+          <!--Set 8192 I/O's -->
+          <Parameter name = "$MAX_DIG_PRT" type = "INTEGER" value = "8192"/>
+          <!--Disable I/O Auto Config -->
+          <Parameter name = "$IO_AUTO_CFG" type = "BOOLEAN" value = "FALSE"/>
+          <Parameter name = "$IO_AUTO_UOP" type = "BOOLEAN" value = "FALSE"/>
+          <!--Jog Overrnamee Limit 100% -->
+          <Parameter name = "$SCR" type = "STRUCTURE">
+            <Parameter name = "$JOGOVLIM" type = "INTEGER" value = "100"/>
+          </Parameter>
+          <!--Corner Distance enable and comp switch setup -->
+          <Parameter name = "$CZCDCFG" type = "STRUCTURE">
+            <Parameter name = "$CD_ENABLE" type = "BOOLEAN" value = "TRUE"/>
+            <!--Set by system software -->
+            <!--Parameter name = "$COMP_SWITCH" type = "INTEGER" value = "3016"/-->
+          </Parameter>
+          <!--Corner Distance angle limit setup -->
+          <Parameter name = "$CZCDGRP">
+            <Member name = "1">
+              <Parameter name = "$CDANG_LIM" type = "REAL" value = "120.0"/>
+            </Member>
+          </Parameter>
+          <!--TCP_SPEED_OUTPUT setup-->
+          <Parameter name = "$TCPP_CFG">
+            <Parameter name = "$TCPP_CMP_SW" type = "BitWiseOR" value = "2"/>
+          </Parameter>
+          <!--Disable Screen Saver -->
+          <Parameter name = "$UI_CONFIG" type = "STRUCTURE">
+            <Parameter name = "$BLNK_ENABLE" type = "BOOLEAN" value = "FALSE"/>
+          </Parameter>
+          <!--DCS variables -->
+          <Parameter name = "$PNSF_SET">
+            <Parameter name = "$BY_T1ONLY" type = "INTEGER" value = "0"/>
+            <Parameter name = "$BY_PWFAIL" type = "INTEGER" value = "0"/>
+            <Parameter name = "$BY_PLCCON" type = "INTEGER" value = "0"/>
+          </Parameter>
+          <!--Enable UDP -->
+          <Parameter name = "$HOSTC_CFG" type  = "ARRAY OF BOOLEAN">
+            <Member name = "3">
+              <Parameter name = "$USE_UDP" type = "BOOLEAN" value = "TRUE"/>
+            </Member>
+            <Member name = "4">
+              <Parameter name = "$USE_UDP" type = "BOOLEAN" value = "TRUE"/>
+            </Member>
+          </Parameter>
+          <!--Menu data for COL GUARD SETUP menu -->
+          <Parameter name = "$HSCDMNGRP">
+            <Member name = "1">
+              <Parameter name ="$DO_ERR" type = "INTEGER" value = "431"/>
+              <Parameter name ="$DO_ENABLE" type = "INTEGER" value = "433"/>
+            </Member>
+          </Parameter>
+          <Parameter name = "$CUSTOMMENU" type = "ARRAY OF STRUCT">
+            <!--Setup BMW instruction Menu -->
+            <Member name = "5">
+              <Parameter name = "$TITLE" type = "STRING" value = "[ BMW ]"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "A01_CMN_MENU"/>
+              <Parameter name = "$OPTION" type = "INTEGER" value = "32"/>
+            </Member>
+            <Member name = "13">
+              <Parameter name = "$TITLE" type = "STRING" value = "ActiveFrames"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "SUPACTFRAMES"/>
+              <Parameter name = "$OPTION" type = "INTEGER" value = "0"/>
+            </Member>
+            <Member name = "14">
+              <Parameter name = "$TITLE" type = "STRING" value = "Manual Mode"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "a01_cmn_man"/>
+              <Parameter name = "$OPTION" type = "INTEGER" value = "0"/>
+            </Member>
+            <Member name = "21">
+              <Parameter name = "$TITLE" type = "STRING" value = "BMW BACKUP"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "A01_BCK_ROUT"/>
+              <Parameter name = "$OPTION" type = "INTEGER" value = "31"/>
+            </Member>
+            <!--Setup BMW instruction Menu -->
+            <Member name = "30">
+              <Parameter name = "$TITLE" type = "STRING" value = "STATUS"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "SUPSTATMENU"/>
+              <Parameter name = "$OPTION" type = "INTEGER" value = "31"/>
+            </Member>
+            <Member name = "31">
+              <Parameter name = "$TITLE" type = "STRING" value = "SETUP"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "SUPSETUPMENU"/>
+              <Parameter name = "$OPTION" type = "INTEGER" value = "31"/>
+            </Member>
+          </Parameter>
+          <!--Configuration ON_PATH signal with hysteresis -->
+          <Parameter name = "$ON_PATH">
+            <Parameter name = "$ENABLE" type = "BOOLEAN" value = "TRUE"/>
+            <Parameter name = "$DIST_DIFF" type = "REAL" value = "10.0"/>
+            <Parameter name = "$ORNT_DIFF" type = "REAL" value = "0.0"/>
+          </Parameter>
+          <!--Setup program selection method -->
+          <Parameter name = "$SHELL_WRK">
+            <Parameter name = "$CUST_NAME" type = "STRING" value = "MAIN"/>
+          </Parameter>
+          <Parameter name = "$SHELL_CFG">
+            <Parameter name = "$SEL_TYPE" type = "INTEGER" value = "9"/>
+          </Parameter>
+          <!--Change default comment in create screen -->
+          <Parameter name = "$PGINP_WORD" type = "ARRAY OF STRING">
+            <!--Setup BMW instruction Menu -->
+            <Member name = "1" type = "STRING" value = "PROG"/>
+            <Member name = "2" type = "STRING" value = "JOB"/>
+            <Member name = "3" type = "STRING" value = "A_PATH_"/>
+            <Member name = "4" type = "STRING" value = "BMW"/>
+            <Member name = "5" type = "STRING" value = "H_TOTH"/>
+          </Parameter>
+          <Parameter name = "$MACROTABLE" type = "ARRAY OF STRUCT">
+            <!-- Frames Popup-->
+            <Member name = "1">
+              <Parameter name = "$MACRO_NAME" type = "STRING" value = "Frames Popup"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "SUPACTFRAMES"/>
+              <Parameter name = "$ASSIGN_TYPE" type = "INTEGER" value = "3"/>
+              <Parameter name = "$ASSIGN_ID" type = "INTEGER" value = "1"/>
+            </Member>
+            <Member name = "2">
+              <Parameter name = "$MACRO_NAME" type = "STRING" value = "Frames Popup"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "SUPACTFRAMES"/>
+              <Parameter name = "$ASSIGN_TYPE" type = "INTEGER" value = "2"/>
+              <Parameter name = "$ASSIGN_ID" type = "INTEGER" value = "1"/>
+            </Member>
+            <!-- BMW manual menu MACRO-->
+            <Member name = "3">
+              <Parameter name = "$MACRO_NAME" type = "STRING" value = "BMW ManualMode"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "A01_CMN_MAN"/>
+              <Parameter name = "$ASSIGN_TYPE" type = "INTEGER" value = "2"/>
+              <Parameter name = "$ASSIGN_ID" type = "INTEGER" value = "3"/>
+            </Member>
+            <!-- BMW manual menu killer MACRO-->
+            <Member name = "4">
+              <Parameter name = "$MACRO_NAME" type = "STRING" value = "Kill ManualMode"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "A01_CMN_KILL"/>
+              <Parameter name = "$ASSIGN_TYPE" type = "INTEGER" value = "3"/>
+              <Parameter name = "$ASSIGN_ID" type = "INTEGER" value = "3"/>
+            </Member>
+            <!--Select MAIN MACRO-->
+            <Member name = "6">
+              <Parameter name = "$MACRO_NAME" type = "STRING" value = "SelectMAIN"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "SELECTMAIN"/>
+              <Parameter name = "$ASSIGN_TYPE" type = "INTEGER" value = "3"/>
+              <Parameter name = "$ASSIGN_ID" type = "INTEGER" value = "5"/>
+            </Member>
+          </Parameter>
+          <!--TP in PR_CALL-->
+          <Parameter name = "$PRCALL_CONF">
+            <Parameter name = "$CALL_TP_ENB" type = "BOOLEAN" value = "TRUE"/>
+            <Parameter name = "$NUM_KLNAME" type = "INTEGER" value = "10"/>
+          </Parameter>
+          <Parameter name = "$PRCALL_KNAM" type = "ARRAY OF STRING">
+            <!--Setup BMW instruction Menu -->
+            <Member name = "1" type = "STRING" value = "TCH"/>
+            <Member name = "2" type = "STRING" value = "GRP"/>
+            <Member name = "3" type = "STRING" value = "SEARCH_S"/>
+            <Member name = "4" type = "STRING" value = "SCR"/>
+            <Member name = "5" type = "STRING" value = "LRS"/>
+            <Member name = "6" type = "STRING" value = "PAL"/>
+            <Member name = "7" type = "STRING" value = "BRT"/>
+            <Member name = "8" type = "STRING" value = "FBF"/>
+          </Parameter>
+          <!--Parameter name = "$PRCALL_KNAM[1]" type = "STRING" value = "CMN"/-->
+          <!--Remote type (always remote)-->
+          <Parameter name = "$REMOTE_CFG">
+            <Parameter name = "$REMOTE_TYPE" type = "INTEGER" value = "1"/>
+          </Parameter>
+          <!--Menu Favorites Enable-->
+          <Parameter name = "$UI_CONFIG">
+            <Parameter name = "$ENB_MENUFAV" type = "BOOLEAN" value = "FALSE"/>
+            <!--Fctn Favorites Enable-->
+            <Parameter name = "$ENB_FCTNFAV" type = "BOOLEAN" value = "FALSE"/>
+            <!--COORD Favorites Enable-->
+            <Parameter name = "$ENB_COORDFV" type = "BOOLEAN" value = "FALSE"/>
+            <!--User Favorites Enable-->
+            <Parameter name = "$ENB_USERFAV" type = "BOOLEAN" value = "FALSE"/>
+          </Parameter>
+
+          <!--Step mode selected-->
+          <Parameter name = "$SSR">
+            <Parameter name = "$STEPSTMTTYP" type = "INTEGER" value = "3"/>
+          </Parameter>
+
+
+          <!--Logbook-->
+          <Parameter name = "$LOG_BUFF" type = "ARRAY OF STRUCT">
+            <Member name = "1">
+              <Parameter name = "$TITLE" type = "STRING" value = "BMW"/>
+              <Parameter name = "$SIZE" type = "INTEGER" value = "500"/>
+            </Member>
+          </Parameter>
+
+
+
+          <Parameter name = "$REFPOS1" type = "ARRAY OF STRUCT">
+            <!--Tolarence of home positions set to 1 -->
+
+            <Member name = "1">
+              <Parameter name = "$PERCHTOL" type = "ARRAY OF REAL">
+                <Member name = "1" type = "REAL" value = "0.01745329"/>
+                <Member name = "2" type = "REAL" value = "0.01745329"/>
+                <Member name = "3" type = "REAL" value = "0.01745329"/>
+                <Member name = "4" type = "REAL" value = "0.01745329"/>
+                <Member name = "5" type = "REAL" value = "0.01745329"/>
+                <Member name = "6" type = "REAL" value = "0.01745329"/>
+                <Member name = "7" type = "REAL" value = "1.0"/>
+                <Member name = "8" type = "REAL" value = "1.0"/>
+                <Member name = "9" type = "REAL" value = "1.0"/>
+              </Parameter>
+            </Member>
+
+            <Member name = "2">
+              <Parameter name = "$PERCHTOL" type = "ARRAY OF REAL">
+                <Member name = "1" type = "REAL" value = "0.01745329"/>
+                <Member name = "2" type = "REAL" value = "0.01745329"/>
+                <Member name = "3" type = "REAL" value = "0.01745329"/>
+                <Member name = "4" type = "REAL" value = "0.01745329"/>
+                <Member name = "5" type = "REAL" value = "0.01745329"/>
+                <Member name = "6" type = "REAL" value = "0.01745329"/>
+                <Member name = "7" type = "REAL" value = "1.0"/>
+                <Member name = "8" type = "REAL" value = "1.0"/>
+                <Member name = "9" type = "REAL" value = "1.0"/>
+              </Parameter>
+            </Member>
+
+
+            <Member name = "3">
+              <Parameter name = "$PERCHTOL" type = "ARRAY OF REAL">
+                <Member name = "1" type = "REAL" value = "0.01745329"/>
+                <Member name = "2" type = "REAL" value = "0.01745329"/>
+                <Member name = "3" type = "REAL" value = "0.01745329"/>
+                <Member name = "4" type = "REAL" value = "0.01745329"/>
+                <Member name = "5" type = "REAL" value = "0.01745329"/>
+                <Member name = "6" type = "REAL" value = "0.01745329"/>
+                <Member name = "7" type = "REAL" value = "1.0"/>
+                <Member name = "8" type = "REAL" value = "1.0"/>
+                <Member name = "9" type = "REAL" value = "1.0"/>
+              </Parameter>
+            </Member>
+
+
+            <Member name = "4">
+              <Parameter name = "$PERCHTOL" type = "ARRAY OF REAL">
+                <Member name = "1" type = "REAL" value = "0.01745329"/>
+                <Member name = "2" type = "REAL" value = "0.01745329"/>
+                <Member name = "3" type = "REAL" value = "0.01745329"/>
+                <Member name = "4" type = "REAL" value = "0.01745329"/>
+                <Member name = "5" type = "REAL" value = "0.01745329"/>
+                <Member name = "6" type = "REAL" value = "0.01745329"/>
+                <Member name = "7" type = "REAL" value = "1.0"/>
+                <Member name = "8" type = "REAL" value = "1.0"/>
+                <Member name = "9" type = "REAL" value = "1.0"/>
+              </Parameter>
+            </Member>
+
+
+            <Member name = "5">
+              <Parameter name = "$PERCHTOL" type = "ARRAY OF REAL">
+                <Member name = "1" type = "REAL" value = "0.01745329"/>
+                <Member name = "2" type = "REAL" value = "0.01745329"/>
+                <Member name = "3" type = "REAL" value = "0.01745329"/>
+                <Member name = "4" type = "REAL" value = "0.01745329"/>
+                <Member name = "5" type = "REAL" value = "0.01745329"/>
+                <Member name = "6" type = "REAL" value = "0.01745329"/>
+                <Member name = "7" type = "REAL" value = "1.0"/>
+                <Member name = "8" type = "REAL" value = "1.0"/>
+                <Member name = "9" type = "REAL" value = "1.0"/>
+              </Parameter>
+            </Member>
+          </Parameter>
+          <Parameter name = "$XVRCFG">
+            <Parameter name = "$PROT_OVRD" type = "BOOLEAN" value = "TRUE"/>
+          </Parameter>
+
+          <!--Payload ID Config-->
+          <Parameter name ="$PLID_CFG">
+            <Parameter name ="$COMP_SWITCH" type = "BitWiseOR" value = "4"/>
+          </Parameter>
+
+          <!--Deactive automatically PNIO stations in case not reachable station was tried to activate-->
+          <Parameter name ="$PNG2_CFG2">
+            <Parameter name ="$USHORT6" type = "BitWiseOR" value = "15"/>
+          </Parameter>
+
+          <!-- Enable USB password function-->
+          <Parameter name = "$PASSWORD">
+            <Parameter name = "$ENB_PCMPWD" type = "BOOLEAN" value = "TRUE"/>
+          </Parameter>
+
+          <!-- Disable LOG_DCS function-->
+          <Parameter name = "$LOG_DCS">
+            <Parameter name = "$ENABLE" type = "INTEGER" value = "0"/>
+            <!-- Set IO for LOG_DCS function to virtual rack and index 520-->
+            <Parameter name = "$OUTPUT_IDX" type = "INTEGER" value = "520"/>
+          </Parameter>
+
+        </External>
+      </LoadOrder>
+
+      <DeleteOrder>
+        <!--additional files-->
+        <File name = "A01_cmn_err.CSV" comment = "" location = "FR:" type = "CSV"/>
+        <File name = "A01.XML" comment = "" location = "FR:" type = "XML"/>
+        <File name = "SupBMWManBut.XML" comment = "" location = "FR:" type = "XML"/>
+        <File name = "Exit.gif" comment = "" location = "FR:\gif\" type = "GIF"/>
+        <File name = "Logo.gif" comment = "" location = "FR:\gif\" type = "GIF"/>
+        <File name = "Null.gif" comment = "" location = "FR:\gif\" type = "GIF"/>
+        <File name = "Next.gif" comment = "" location = "FR:\gif\" type = "GIF"/>
+        <File name = "dot.xml" comment = "" location = "FR:" type = "XML"/>
+
+        <!--argument wizard-->
+        <File name = "ARGDISPEG01.dt" location = "FR:" comment = "ARGDISPEG01" type = "DT"/>
+        <File name = "ARGDISPGR01.dt" location = "FR:" comment = "ARGDISPEG01" type = "DT"/>
+
+        <!--TP programs-->
+        <File name = "ABORTHOME_1" location = "MD:" comment ="ABORTHOME_1" type = "TP"/>
+        <File name = "ABORTHOME_2" location = "MD:" comment ="ABORTHOME_2" type = "TP"/>
+        <File name = "ABORTHOME_3" location = "MD:" comment ="ABORTHOME_3" type = "TP"/>
+        <File name = "ABORTHOME_4" location = "MD:" comment ="ABORTHOME_4" type = "TP"/>
+        <File name = "ABORTHOME_5" location = "MD:" comment ="ABORTHOME_5" type = "TP"/>
+        <File name = "GO_HOME" location = "MD:" comment ="GO_HOME" type = "TP"/>
+        <File name = "INIT_AFTER_HOME" location = "MD:" comment ="INIT_AFTER_HOME" type = "TP"/>
+        <File name = "INIT_BEFORE_HOME" location = "MD:" comment ="INIT_BEFORE_HOME" type = "TP"/>
+        <File name = "INIT_PRODUCTION" location = "MD:" comment ="INIT_PRODUCTION" type = "TP"/>
+        <File name = "INITAPP" location = "MD:" comment ="INITAPP" type = "TP"/>
+        <File name = "INITPROGRAM" location = "MD:" comment ="INITPROGRAM" type = "TP"/>
+        <File name = "MAIN" location = "MD:" comment ="MAIN" type = "TP"/>
+        <File name = "PROG251" location = "MD:" comment ="PROG251" type = "TP"/>
+
+        <!--application files-->
+        <File name = "A01_cmn_kill" comment = "A01_cmn_kill" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_bck_rout" location = "MD:" comment ="BMW BACKUP" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_bck_task" location = "MD:" comment ="BACKUP TASK" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_bck_vers" location = "MD:" comment ="BACKUP VERSION" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "PNPED9utilW" location = "MD:" comment ="OLP IMPORT" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "PNPED9mainW" location = "MD:" comment ="OLP IMPORT" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_zip_rout" location = "MD:" comment ="OLP IMPORT" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "CMN" comment = "CMN" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "CMN_P" comment = "CMN_P" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "TaskATPOff" comment = "TaskATPOff" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "SelectMain" comment = "SelectMain" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "MessageDisp" comment = "MessageDisp" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "MessageDispM.pc" location = "MD:" comment ="MessageDispM" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "ComLubri" comment = "ComLubri" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "BreakTest" comment = "BreakTest" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_cmn_lub" comment = "A01_cmn_lub" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_cmn_gui" comment = "A01_cmn_gui" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "SUPAPPLIST" comment = "SUPAPPLIST" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "SUPSETUPMENU" comment = "SUPSETUPMENU" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "SUPSTATMENU" comment = "SUPSTATMENU" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_cmn_menu" comment = "A01_cmn_menu" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_cmn_man" comment = "A01_cmn_man" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_cmn_mon" comment = "A01_cmn_mon" location = "MD:" type = "KAREL" monitoring = "TRUE"/>
+        <File name = "A01_cmn_Ev" comment = "A01_cmn_Ev" location = "MD:" type = "KAREL" monitoring = "TRUE"/>
+        <File name = "cmn_InitAuto" comment = "cmn_InitAuto" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "Lib_UDP" comment = "Lib_UDP" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "SendUDPT" comment = "SendUDPT" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "supactframes" comment = "supactframes" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_cmn_rout" comment = "A01_cmn_rout" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_cmn_err" comment = "A01_cmn_err" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_cmn_var" comment = "A01_cmn_var" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+
+
+        <!--application VR files-->
+        <File name = "back" location = "MD:" comment = "MSGO" type = "VARIABLE"/>
+        <File name = "backgr" location = "MD:" comment = "MSGO" type = "VARIABLE"/>
+        <File name = "CMN" comment = "CMN.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "CMN_P" comment = "CMN_P.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "ClearRegister " comment ="ClearRegister " location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "TaskATPOn" comment = "TaskATPOn.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "TaskATPOff" comment = "TaskATPOff.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "SelectMain" comment = "SelectMain.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "MessageDisp" comment = "MessageDisp.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "ComLubri" comment = "ComLubri.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "BreakTest" comment = "BreakTest.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "A01_cmn_lub" comment = "A01_cmn_lub.vr" location  = "MD:" type = "VARIABLE"/>
+        <File name = "A01_cmn_gui" comment = "A01_cmn_gui.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "SUPAPPLIST" comment = "SUPAPPLIST.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "SUPSETUPMENU" comment = "SUPSETUPMENU.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "SUPSTATMENU" comment = "SUPSTATMENU.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "A01_cmn_menu" comment= "A01_cmn_menu.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "A01_bck_rout" comment= "A01_bck_rout.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "A01_bck_vers" comment= "A01_bck_vers.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "A01_cmn_kill" comment = "A01_cmn_kill.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "A01_cmn_Ev" comment = "A01_cmn_Ev.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "Lib_UDP" comment = "Lib_UDP.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "A01_cmn_man" comment = "A01_cmn_man.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "A01_cmn_mon" comment = "A01_cmn_mon.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "cmn_InitAuto" comment= "cmn_InitAuto.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "SendUDPT" comment = "SendUDPT.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "XML_lib" comment = "XML_lib.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "A01_cmn_rout" comment = "A01_cmn_rout.vr" location= "MD:" type = "VARIABLE"/>
+        <File name = "A01_cmn_err" comment = "A01_cmn_err.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "A01_cmn_var" comment = "A01_cmn_var.vr" location = "MD:" type = "VARIABLE"/>
+
+
+        <!--dictionary files-->
+        <File name = "GUIE" location = "MD:" comment = "GUIE" type = "VARIABLE"/>
+        <File name = "Home" location = "MD:" comment = "Home" type = "VARIABLE"/>
+        <File name = "MSGO" location = "MD:" comment = "MSGO" type = "VARIABLE"/>
+        <File name = "back" location = "MD:" comment = "BACK" type = "VARIABLE"/>
+        <File name = "olpl" location = "MD:" comment = "OLPL" type = "VARIABLE"/>
+        <File name = "GUIE" location = "MD:" comment ="GUIE" type = "DICTIONARY"/>
+        <File name = "Home" location = "MD:" comment ="Home" type = "DICTIONARY"/>
+        <File name = "MSGO" location = "MD:" comment ="MSGO" type = "DICTIONARY"/>
+        <File name = "BACK" location = "MD:" comment ="BACK" type = "DICTIONARY"/>
+        <File name = "OLPL" location = "MD:" comment ="OLPL" type = "DICTIONARY"/>
+
+
+
+
+
+        <!--system variable settings-->
+
+
+
+
+        <External name = "[*SYSTEM*]">
+          <!--karel background tasks-->
+          <Parameter name = "$KRLCFG" type = "ARRAY OF STRUCT">
+            <Member name = "1">
+              <Parameter name = "$PROG_NAME" type = "STRING" value = ""/>
+              <Parameter name = "$AUTOSTART" type = "BOOLEAN" value = "FALSE"/>
+              <Parameter name = "$STAT_ENB" type = "BOOLEAN" value = "FALSE"/>
+              <Parameter name = "$DO1_NUM" type = "INTEGER" value = "0"/>
+              <Parameter name = "$DO2_NUM" type = "INTEGER" value = "0"/>
+              <Parameter name = "$MODESET" type = "INTEGER" value = "1"/>
+              <Parameter name = "$OUTPUT_ALM" type = "BOOLEAN" value = "FALSE"/>
+            </Member>
+          </Parameter>
+
+          <Parameter name = "$CUSTOMMENU" type = "ARRAY OF STRUCT">
+            <!--Setup BMW instruction Menu -->
+            <Member name = "5">
+              <Parameter name ="$TITLE" type = "STRING" value = ""/>
+              <Parameter name ="$PROG_NAME" type = "STRING" value = ""/>
+            </Member>
+            <Member name = "11">
+              <Parameter name = "$TITLE" type = "STRING" value = ""/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = ""/>
+            </Member>
+            <Member name = "21">
+              <Parameter name = "$TITLE" type = "STRING" value = ""/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = ""/>
+              <Parameter name = "$OPTION" type = "INTEGER" value = "0"/>
+            </Member>
+            <!--Setup BMW instruction Menu -->
+            <Member name = "30">
+              <Parameter name ="$TITLE" type = "STRING" value = ""/>
+              <Parameter name ="$PROG_NAME" type = "STRING" value = ""/>
+              <Parameter name = "$OPTION" type = "INTEGER" value = "0"/>
+            </Member>
+            <Member name = "31">
+              <Parameter name ="$TITLE" type = "STRING" value = ""/>
+              <Parameter name ="$PROG_NAME" type = "STRING" value = ""/>
+              <Parameter name = "$OPTION" type = "INTEGER" value = "0"/>
+            </Member>
+          </Parameter>
+
+          <!--Setup program selection method -->
+          <Parameter name = "$SHELL_WRK">
+            <Parameter name = "$CUST_NAME" type = "STRING" value = ""/>
+          </Parameter>
+          <Parameter name = "$SHELL_CFG">
+            <Parameter name = "$SEL_TYPE" type = "INTEGER" value = "0"/>
+          </Parameter>
+
+
+
+          <Parameter name = "$MACROTABLE" type = "ARRAY OF STRUCT">
+            <!-- BMW manual menu MACRO-->
+            <Member name = "3">
+              <Parameter name = "$MACRO_NAME" type = "STRING" value = ""/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = ""/>
+              <Parameter name = "$ASSIGN_TYPE" type = "INTEGER" value = "0"/>
+              <Parameter name = "$ASSIGN_ID" type = "INTEGER" value = "0"/>
+            </Member>
+            <!-- BMW manual menu killer MACRO-->
+            <Member name = "4">
+              <Parameter name = "$MACRO_NAME" type = "STRING" value = ""/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = ""/>
+              <Parameter name = "$ASSIGN_TYPE" type = "INTEGER" value = "0"/>
+              <Parameter name = "$ASSIGN_ID" type = "INTEGER" value = "0"/>
+            </Member>
+            <!--Select MAIN MACRO-->
+            <Member name = "6">
+              <Parameter name = "$MACRO_NAME" type = "STRING" value = ""/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = ""/>
+              <Parameter name = "$ASSIGN_TYPE" type = "INTEGER" value = "0"/>
+              <Parameter name = "$ASSIGN_ID" type = "INTEGER" value = "0"/>
+            </Member>
+          </Parameter>
+        </External>
+      </DeleteOrder>
+
+      <!--Translations-->
+      <!--Example:-->
+      <!--Translation old = "[A01_cmn_var]strukturA[3].VarNameOld" new = "[A01_cmn_var]strukturB[12].VarNameNew" /-->
+      <!--Translation old = "[A01_cmn_mon]VarA" new = "[A01_cmn_var]VarB" /-->
+
+      <!--non adjustable constants-->
+      <Const>
+
+      </Const>
+      <!--If cell has a rail unit then TRUE (need to set by the tool)-->
+      <Parameter name ="b_RailUnit" type = "BOOLEAN"  default = "FALSE"/>
+      <!--UDP parameter (need to set by the tool)-->
+      <Parameter name ="st_UDPAdr" type = "STRING"  default = ""/>
+      <Parameter name ="st_Port" type = "STRING"  default = "9000"/>
+      <!--If the cell uses 2 PLC for collision zones then TRUE  (need to set by the tool)-->
+      <Parameter name ="b_PLC2" type = "BOOLEAN"  default = "FALSE"/>
+    </Version>
+    <Version value = "0.1.5">
+      <!--value name application revisions-->
+      <LoadOrder>
+        <!--dictionary files-->
+        <File name = "A01\forms\vr\GUIE.vr" location = "MD:" comment = "GUIE" type = "VARIABLE"/>
+        <File name = "A01\forms\vr\Home.vr" location = "MD:" comment = "Home" type = "VARIABLE"/>
+        <File name = "A01\forms\vr\MSGO.vr" location = "MD:" comment = "MSGO" type = "VARIABLE"/>
+        <File name = "A01\forms\vr\back.vr" location = "MD:" comment = "BACK" type = "VARIABLE"/>
+        <File name = "A01\forms\tx\A1GUIEEG.tx" location = "MD:" comment ="GUIE" type = "DICTIONARY"/>
+        <File name = "A01\forms\tx\A1HomeEG.tx" location = "MD:" comment ="Home" type = "DICTIONARY"/>
+        <File name = "A01\forms\tx\A1MSGOEG.tx" location = "MD:" comment ="MSGO" type = "DICTIONARY"/>
+        <File name = "A01\forms\tx\01BACKEG.tx" location = "MD:" comment ="BACK" type = "DICTIONARY"/>
+        <!--application files-->
+        <File name = "A01\PC\A01_cmn_gui.pc" location = "MD:" comment = "A01_cmn_gui" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_cmn_lub.pc" location = "MD:" comment = "A01_cmn_lub" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_cmn_err.pc" location = "MD:" comment = "A01_cmn_err" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_cmn_man.pc" location = "MD:" comment = "A01_cmn_man" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_cmn_menu.pc" location = "MD:" comment = "A01_cmn_menu" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_cmn_mon.pc" location = "MD:" comment = "A01_cmn_mon" type = "KAREL" monitoring = "TRUE"/>
+        <File name = "A01\PC\A01_cmn_Ev.pc" location = "MD:" comment = "A01_cmn_Ev" type = "KAREL" monitoring = "TRUE"/>
+        <File name = "A01\PC\A01_cmn_rout.pc" location = "MD:" comment = "A01_cmn_rout" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\BreakTest.pc" location = "MD:" comment ="BreakTest" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\cmn_InitAuto.pc" location = "MD:" comment ="cmn_InitAuto" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\ComLubri.pc" location = "MD:" comment ="ComLubri" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\Lib_UDP.pc" location = "MD:" comment ="Lib_UDP" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\MessageDisp.pc" location = "MD:" comment ="MessageDisp" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\SelectMain.pc" location = "MD:" comment ="SelectMain" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\SendUDPT.pc" location = "MD:" comment ="SendUDPT" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\TaskATPOff.pc" location = "MD:" comment ="TaskATPOff" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\CMN.pc" location = "MD:" comment ="CMN" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\CMN_P.pc" location = "MD:" comment ="CMN_P" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\ClearRegister.pc" location = "MD:" comment ="ClearRegister " type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\SUPAPPLIST.pc" location = "MD:" comment ="SUPAPPLIST" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\SUPSETUPMENU.pc" location = "MD:" comment ="SUPSETUPMENU" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\SUPSTATMENU.pc" location = "MD:" comment ="SUPSTATMENU" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_bck_rout.pc" location = "MD:" comment ="BMW BACKUP" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_bck_task.pc" location = "MD:" comment ="BACKUP TASK" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_bck_vers.pc" location = "MD:" comment ="BACKUP VERSION" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\PNPED9mainW.pc" location = "MD:" comment ="ProfiEnergy" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\PNPED9utilW.pc" location = "MD:" comment ="ProfiEnergy" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_zip_rout.pc" location = "MD:" comment ="ZIP LIBRARY" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\supactframes.pc" location = "MD:" comment ="Frames Popup" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_cmn_kill.pc" location = "MD:" comment ="xmlKiller" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01\PC\A01_cmn_var.pc" location = "MD:" comment ="A01_cmn_var" type = "KAREL" monitoring = "FALSE"/>
+
+        <!--TP programs-->
+        <File name = "A01\TP\ABORTHOME_1.ls" location = "MD:" comment ="ABORTHOME_1" type = "LS"/>
+        <File name = "A01\TP\ABORTHOME_2.ls" location = "MD:" comment ="ABORTHOME_2" type = "LS"/>
+        <File name = "A01\TP\ABORTHOME_3.ls" location = "MD:" comment ="ABORTHOME_3" type = "LS"/>
+        <File name = "A01\TP\ABORTHOME_4.ls" location = "MD:" comment ="ABORTHOME_4" type = "LS"/>
+        <File name = "A01\TP\ABORTHOME_5.ls" location = "MD:" comment ="ABORTHOME_5" type = "LS"/>
+        <File name = "A01\TP\GO_HOME.ls" location = "MD:" comment ="GO_HOME" type = "LS"/>
+        <File name = "A01\TP\INIT_AFTER_HOME.ls" location = "MD:" comment ="INIT_AFTER_HOME" type = "LS" overwrite = "false"/>
+        <File name = "A01\TP\INIT_BEFORE_HOME.ls" location = "MD:" comment ="INIT_BEFORE_HOME" type = "LS" overwrite = "false"/>
+        <File name = "A01\TP\INIT_PRODUCTION.ls" location = "MD:" comment ="INIT_PRODUCTION" type = "LS" overwrite = "false"/>
+        <File name = "A01\TP\INITAPP.ls" location = "MD:" comment ="INITAPP" type = "LS" overwrite = "false"/>
+        <File name = "A01\TP\INITPROGRAM.ls" location = "MD:" comment ="INITPROGRAM" type = "LS" overwrite = "false"/>
+        <File name = "A01\TP\MAIN.ls" location = "MD:" comment ="MAIN" type = "LS"/>
+        <File name = "A01\TP\PROG251.ls" location = "MD:" comment ="PROG251" type = "LS"/>
+
+        <!--argument wizard-->
+        <File name = "A01\config\ARGDISPEG01.dt" location = "FR:" comment = "ARGDISPEG01" type = "DT"/>
+
+        <!--additional files-->
+        <File name = "A01\config\A01_cmn_err.csv" location = "FR:" comment = "A01_cmn_err" type = "CSV"/>
+        <File name = "A01\config\a01.xml" location = "FR:" comment = "a01" type = "XML"/>
+        <File name = "A01\config\a01.cvr" location = "FR:" comment = "a01" type = "CVR"/>
+        <File name = "A01\config\SupBMWManBut.xml" location = "FR:" comment = "SupBMWManBut" type = "XML"/>
+        <File name = "A01\config\FramesInfo.xml" location = "FR:" comment = "FramesInfo" type = "XML"/>
+        <File name = "A01\config\gif\Exit.gif" comment = "" location = "FR:\gif\" type = "GIF"/>
+        <File name = "A01\config\gif\Logo.gif" comment = "" location = "FR:\gif\" type = "GIF"/>
+        <File name = "A01\config\gif\Null.gif" comment = "" location = "FR:\gif\" type = "GIF"/>
+        <File name = "A01\config\gif\Next.gif" comment = "" location = "FR:\gif\" type = "GIF"/>
+        <File name = "A01\config\gif\Prev.gif" comment = "" location = "FR:\gif\" type = "GIF"/>
+        <File name = "A01\config\dot.xml" location = "FR:" comment = "dot" type = "XML"/>
+        <File name = "A01\config\DCS.CVR" location = "FR:" comment = "DCS" type = "CVR"/>
+        <File name = "A01\config\Workbook.CVR" location = "FR:" comment = "Workbook" type = "CVR"/>
+        <File name = "A01\config\RobotDataDefinition.CVR" location = "FR:" comment = "RobotDataDefinition" type = "CVR"/>
+        <File name = "A01\config\bmwmenu.as" location = "FRSU:" comment = "BMW Menu" type = "AS"/>
+        <File name = "A01\config\password.dt" location = "MD:" comment = "password" type = "DT"/>
+        <File name = "A01\config\syspass.sv" location = "MD:" comment = "syspass" type = "SV"/>
+
+        <!--settings in root variable file (A01_CMN_VAR)-->
+        <Parameter name = "ar_apps" type = "ARRAY OF STRUCTURE">
+          <Member name = "1">
+            <Parameter name = "A" type = "STRUCTURE">
+              <Parameter name = "b_installed" type = "BOOLEAN" value = "TRUE"/>
+              <Parameter name = "st_version" type = "STRING" value = "0.1.5"/>
+            </Parameter>
+          </Member>
+        </Parameter>
+
+        <!--Setting FAP version to Utilities screen -->
+        <Parameter name = "st_InstalledFapVersion" type = "STRING" value = "FAP 0.0.0"/>
+        <Parameter name = "i_RequiredSystemVersion" type = "INTEGER" value = "8002"/>
+        <!--settings in external variable file-->
+        <!--example:-->
+        <!--External name = "[A01_CMN_MON]">
+                    <Parameter name = "Ex1" type = "ARRAY OF INTEGER">
+                        <Member name = "1">
+                            <Parameter name = "i_Example" type = "INTEGER" value = "5"/>
+                        </Member>
+                    </Parameter>
+                </External-->
+
+        <!--system variable settings-->
+        <External name = "[*SYSTEM*]">
+
+          <Parameter name ="$OPWORK">
+            <!--Enable UI signals from config menu-->
+            <Parameter name ="$UOP_DISABLE" type = "INTEGER"  value = "0"/>
+          </Parameter>
+
+          <!--Enable Argument Wizard functionality -->
+          <!--0 = Wizard to input arguments is disabled -->
+          <!--1 = Wizard to input arguments is enabled (Default) -->
+          <!--2 = Wizard to input arguments is enabled and the value of macro definition is displayed -->
+          <Parameter name = "$ARGDISPMODE" type = "INTEGER" value = "1"/>
+
+          <Parameter name ="$UI_CONFIG">
+            <!--Robotercomment auf TP (need to set by the tool)-->
+            <Parameter name ="$DSP_NAME" type = "STRING"  default = ""/>
+            <!--disable the screensaver-->
+            <Parameter name ="$BLNK_ENABLE" type = "BOOLEAN"  value = "FALSE"/>
+            <!--disable the touch beep-->
+            <Parameter name ="$TOUCH_BEEP" type = "BOOLEAN"  value = "FALSE"/>
+          </Parameter>
+
+          <!--switch off Autobackup -->
+          <Parameter name = "$AUTOBACKUP">
+            <!--enable switch -->
+            <Parameter name = "$ENABLE" type = "BOOLEAN" value = "FALSE"/>
+          </Parameter>
+
+          <!--Add additional files from FR to AoA/Autobackup -->
+          <Parameter name = "$FILE_APPBCK">
+           <!--XML Files -->
+            <Member name = "20">
+              <Parameter name = "$FILE_NAME" type = "STRING" value = "*.XML"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "FR:*.XML"/>
+              <Parameter name = "$FUNC_CODE" type = "INTEGER" value = "11"/>
+              <Parameter name = "$MODIFIER" type = "INTEGER" value = "0"/>
+              <Parameter name = "$COMMENT" type = "STRING" value = "BMW_XML_FILES"/>
+              <Parameter name = "$FUNC_PTR" type = "INTEGER" value = "0"/>
+            </Member>
+            <!--GIF Files -->
+            <Member name = "21">
+              <Parameter name = "$FILE_NAME" type = "STRING" value = "*.GIF"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "FR:\\GIF\\*.GIF"/>
+              <Parameter name = "$FUNC_CODE" type = "INTEGER" value = "11"/>
+              <Parameter name = "$MODIFIER" type = "INTEGER" value = "0"/>
+              <Parameter name = "$COMMENT" type = "STRING" value = "BMW_GIF_FILES"/>
+              <Parameter name = "$FUNC_PTR" type = "INTEGER" value = "0"/>
+            </Member>
+            <!--CSV Files -->
+            <Member name = "22">
+              <Parameter name = "$FILE_NAME" type = "STRING" value = "*.CSV"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "FR:*.CSV"/>
+              <Parameter name = "$FUNC_CODE" type = "INTEGER" value = "11"/>
+              <Parameter name = "$MODIFIER" type = "INTEGER" value = "0"/>
+              <Parameter name = "$COMMENT" type = "STRING" value = "BMW_CSV_FILES"/>
+              <Parameter name = "$FUNC_PTR" type = "INTEGER" value = "0"/>
+            </Member>
+          </Parameter>
+
+          <!--Check simulated DO -->
+          <Parameter name = "$OUT_SIM_DO" type = "INTEGER" value = "517"/>
+          <!--Check simulated DI -->
+          <Parameter name = "$INPT_SIM_DO" type = "INTEGER" value = "518"/>
+          <!--Check override-->
+          <Parameter name = "$GENOVRD_DO" type = "INTEGER" value = "423"/>
+          <!--No simulation of Singnals in Automode-->
+          <Parameter name = "$AUTOMODE_DO" type = "BOOLEAN" value = "FALSE"/>
+
+          <!--IO comments for summary.dg 0 = activeted, 1 = deactivated -->
+          <Parameter name = "$IO_CMT_OPT" type = "INTEGER" value = "0"/>
+
+          <!--Profinet-->
+          <Parameter name = "$PNG2_CFG">
+            <!--number of availables I/Os -->
+            <Parameter name = "$C_DI_PRT" type = "INTEGER" value = "4096"/>
+            <Parameter name = "$C_DO_PRT" type = "INTEGER" value = "4096"/>
+            <Parameter name = "$D_DI_PRT" type = "INTEGER" value = "4096"/>
+            <Parameter name = "$D_DO_PRT" type = "INTEGER" value = "4096"/>
+            <Parameter name = "$TRC_ENABLE" type = "INTEGER" value = "0"/>
+            <Parameter name = "$TRC_TIME" type = "INTEGER" value = "1"/>
+            <Parameter name = "$TRC_DEST" type = "INTEGER" value = "1"/>
+            <Parameter name = "$TRC_DEPTH" type = "INTEGER" value = "9"/>
+            <Parameter name = "$TRC_GROUP" type = "INTEGER" value = "65663"/>
+            <Parameter name = "$TRC_FILE" type = "STRING" value = "UD1:\PNIOTRC.TXT"/>
+
+          </Parameter>
+          <Parameter name = "$PNG2_CFG2">
+            <!--additional ProfiNet Info Screen -->
+            <Parameter name = "$USHORT5" type = "INTEGER" value = "8"/>
+            <!--enable attach/detach from KAREL -->
+            <!--Parameter name = "$USHORT6" type = "INTEGER" value = "15"/-->
+          </Parameter>
+          <Parameter name = "$PNIO_POFF">
+            <Parameter name = "$ENABLE" type = "BOOLEAN" value = "TRUE"/>
+            <Parameter name = "$CUSTOM" type = "INTEGER" value = "2"/>
+            <Parameter name = "$TIMER1" type = "INTEGER" value = "300"/>
+            <Parameter name = "$TIMER2" type = "INTEGER" value = "25"/>
+            <Parameter name = "$NSI_PORT" type = "INTEGER" value = "32"/>
+          </Parameter>
+
+          <!--amount of tasks and frames-->
+          <Parameter name = "$SCR">
+            <Parameter name = "$MAXNUMTASK" type = "INTEGER" value = "28"/>
+            <Parameter name = "$MAXNUMUFRAM" type = "INTEGER" value = "61"/>
+            <Parameter name = "$MAXNUMUTOOL" type = "INTEGER" value = "29"/>
+          </Parameter>
+
+          <!--DNS-->
+          <Parameter name = "$DNS_CFG">
+            <Parameter name = "$RETRIES" type = "INTEGER" value = "2"/>
+            <Parameter name = "$WAIT_TIME" type = "INTEGER" value = "2"/>
+            <!--Parameter name = "$ENABLE" type = "BOOLEAN" value = "TRUE"/-->
+          </Parameter>
+
+          <!--NTP-->
+          <Parameter name = "$SNTP_CFG">
+            <Parameter name = "$TIME_WIN" type = "INTEGER" value = "4"/>
+            <!--Timezone setting-->
+            <Parameter name ="$TZ_INDEX" type = "INTEGER"  value = "14" />
+            <Parameter name ="$ENABLE" type = "BOOLEAN" value = "TRUE" />
+            <!--Timezone offset setting-->
+            <Parameter name ="$TZ_OFFSET" type = "INTEGER"  value = "60" />
+            <Parameter name ="$CUR_OFFSET" type = "INTEGER" value = "120" />
+          </Parameter>
+
+          <!--general IP settings-->
+          <Parameter name = "$HOSTENT">
+            <Member name = "17">
+              <Parameter name = "$H_NAME" type = "STRING" value = "QUICC0"/>
+              <Parameter name = "$H_ADDRTYPE" type = "INTEGER" value = "2"/>
+              <Parameter name = "$H_LENGTH" type = "INTEGER" value = "4"/>
+            </Member>
+            <Member name = "18">
+              <Parameter name = "$H_NAME" type = "STRING" value = "QUICC1"/>
+              <Parameter name = "$H_ADDRTYPE" type = "INTEGER" value = "2"/>
+              <Parameter name = "$H_LENGTH" type = "INTEGER" value = "4"/>
+            </Member>
+            <Member name = "20">
+              <Parameter name = "$H_NAME" type = "STRING" value = "ROUTER"/>
+              <Parameter name = "$H_ADDRTYPE" type = "INTEGER" value = "2"/>
+              <Parameter name = "$H_LENGTH" type = "INTEGER" value = "4"/>
+            </Member>
+          </Parameter>
+
+          <!--amount of payloads-->
+          <Parameter name = "$PLST_SCHNUM" type = "INTEGER" value = "29"/>
+
+          <!-- Top Menu screen disable (TBC) -->
+          <Parameter name = "$UI_CONFIG.$ENB_TOPMENU" type = "BOOLEAN" value = "FALSE"/>
+
+          <!--karel background tasks-->
+          <Parameter name = "$KRLCFG">
+            <Member name = "1">
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "A01_CMN_MON"/>
+              <Parameter name = "$AUTOSTART" type = "BOOLEAN" value = "TRUE"/>
+              <Parameter name = "$MODESET" type = "INTEGER" value = "2"/>
+              <Parameter name = "$DO1_NUM" type = "INTEGER" value = "434"/>
+              <Parameter name = "$DO2_NUM" type = "INTEGER" value = "435"/>
+              <Parameter name = "$STAT_ENB" type = "BOOLEAN" value = "TRUE"/>
+              <Parameter name = "$OUTPUT_ALM" type = "BOOLEAN" value = "TRUE"/>
+            </Member>
+          </Parameter>
+
+          <!--AUTO conformation Signal-->
+          <Parameter name = "$DCS_CFG">
+            <Parameter name = "$AUTOCNF_IDX" type = "INTEGER" value = "428"/>
+          </Parameter>
+          <!--Setup DEADMAN SWITCH automatic reset function -->
+          <Parameter name = "$DMAURST" type = "BOOLEAN" value = "TRUE"/>
+          <!--Karel Callback Conf -->
+          <Parameter name = "$PRCALL_CONF" type = "STRUCTURE">
+            <Parameter name = "$PRCALL_ENB" type = "BOOLEAN" value = "TRUE"/>
+          </Parameter>
+          <!--Jog limit override -->
+          <Parameter name = "$SCR" type = "STRUCTURE">
+            <Parameter name = "$JOGOVLIM" type = "INTEGER" value = "100"/>
+          </Parameter>
+          <!--Set 8192 I/O's -->
+          <Parameter name = "$MAX_DIG_PRT" type = "INTEGER" value = "8192"/>
+          <!--Disable I/O Auto Config -->
+          <Parameter name = "$IO_AUTO_CFG" type = "BOOLEAN" value = "FALSE"/>
+          <Parameter name = "$IO_AUTO_UOP" type = "BOOLEAN" value = "FALSE"/>
+          <!--Jog Overrnamee Limit 100% -->
+          <Parameter name = "$SCR" type = "STRUCTURE">
+            <Parameter name = "$JOGOVLIM" type = "INTEGER" value = "100"/>
+          </Parameter>
+          <!--Corner Distance enable and comp switch setup -->
+          <Parameter name = "$CZCDCFG" type = "STRUCTURE">
+            <Parameter name = "$CD_ENABLE" type = "BOOLEAN" value = "TRUE"/>
+            <!--Set by system software -->
+            <!--Parameter name = "$COMP_SWITCH" type = "INTEGER" value = "3016"/-->
+          </Parameter>
+          <!--Corner Distance angle limit setup -->
+          <Parameter name = "$CZCDGRP">
+            <Member name = "1">
+              <Parameter name = "$CDANG_LIM" type = "REAL" value = "120.0"/>
+            </Member>
+          </Parameter>
+          <!--TCP_SPEED_OUTPUT setup-->
+          <Parameter name = "$TCPP_CFG">
+            <Parameter name = "$TCPP_CMP_SW" type = "BitWiseOR" value = "2"/>
+          </Parameter>
+          <!--Disable Screen Saver -->
+          <Parameter name = "$UI_CONFIG" type = "STRUCTURE">
+            <Parameter name = "$BLNK_ENABLE" type = "BOOLEAN" value = "FALSE"/>
+          </Parameter>
+          <!--DCS variables -->
+          <Parameter name = "$PNSF_SET">
+            <Parameter name = "$BY_T1ONLY" type = "INTEGER" value = "0"/>
+            <Parameter name = "$BY_PWFAIL" type = "INTEGER" value = "0"/>
+            <Parameter name = "$BY_PLCCON" type = "INTEGER" value = "0"/>
+          </Parameter>
+          <!--Enable UDP -->
+          <Parameter name = "$HOSTC_CFG" type  = "ARRAY OF BOOLEAN">
+            <Member name = "3">
+              <Parameter name = "$USE_UDP" type = "BOOLEAN" value = "TRUE"/>
+            </Member>
+            <Member name = "4">
+              <Parameter name = "$USE_UDP" type = "BOOLEAN" value = "TRUE"/>
+            </Member>
+          </Parameter>
+          <!--Menu data for COL GUARD SETUP menu -->
+          <Parameter name = "$HSCDMNGRP">
+            <Member name = "1">
+              <Parameter name ="$DO_ERR" type = "INTEGER" value = "431"/>
+              <Parameter name ="$DO_ENABLE" type = "INTEGER" value = "433"/>
+            </Member>
+          </Parameter>
+          <Parameter name = "$CUSTOMMENU" type = "ARRAY OF STRUCT">
+            <!--Setup BMW instruction Menu -->
+            <Member name = "5">
+              <Parameter name = "$TITLE" type = "STRING" value = "[ BMW ]"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "A01_CMN_MENU"/>
+              <Parameter name = "$OPTION" type = "INTEGER" value = "32"/>
+            </Member>
+            <Member name = "13">
+              <Parameter name = "$TITLE" type = "STRING" value = "ActiveFrames"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "SUPACTFRAMES"/>
+              <Parameter name = "$OPTION" type = "INTEGER" value = "0"/>
+            </Member>
+            <Member name = "14">
+              <Parameter name = "$TITLE" type = "STRING" value = "Manual Mode"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "a01_cmn_man"/>
+              <Parameter name = "$OPTION" type = "INTEGER" value = "0"/>
+            </Member>
+            <Member name = "21">
+              <Parameter name = "$TITLE" type = "STRING" value = "BMW BACKUP"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "A01_BCK_ROUT"/>
+              <Parameter name = "$OPTION" type = "INTEGER" value = "31"/>
+            </Member>
+            <!--Setup BMW instruction Menu -->
+            <Member name = "30">
+              <Parameter name = "$TITLE" type = "STRING" value = "STATUS"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "SUPSTATMENU"/>
+              <Parameter name = "$OPTION" type = "INTEGER" value = "31"/>
+            </Member>
+            <Member name = "31">
+              <Parameter name = "$TITLE" type = "STRING" value = "SETUP"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "SUPSETUPMENU"/>
+              <Parameter name = "$OPTION" type = "INTEGER" value = "31"/>
+            </Member>
+          </Parameter>
+          <!--Configuration ON_PATH signal with hysteresis -->
+          <Parameter name = "$ON_PATH">
+            <Parameter name = "$ENABLE" type = "BOOLEAN" value = "TRUE"/>
+            <Parameter name = "$DIST_DIFF" type = "REAL" value = "10.0"/>
+            <Parameter name = "$ORNT_DIFF" type = "REAL" value = "0.0"/>
+          </Parameter>
+          <!--Setup program selection method -->
+          <Parameter name = "$SHELL_WRK">
+            <Parameter name = "$CUST_NAME" type = "STRING" value = "MAIN"/>
+          </Parameter>
+          <Parameter name = "$SHELL_CFG">
+            <Parameter name = "$SEL_TYPE" type = "INTEGER" value = "9"/>
+          </Parameter>
+          <!--Change default comment in create screen -->
+          <Parameter name = "$PGINP_WORD" type = "ARRAY OF STRING">
+            <!--Setup BMW instruction Menu -->
+            <Member name = "1" type = "STRING" value = "PROG"/>
+            <Member name = "2" type = "STRING" value = "JOB"/>
+            <Member name = "3" type = "STRING" value = "A_PATH_"/>
+            <Member name = "4" type = "STRING" value = "BMW"/>
+            <Member name = "5" type = "STRING" value = "H_TOTH"/>
+          </Parameter>
+          <Parameter name = "$MACROTABLE" type = "ARRAY OF STRUCT">
+            <!-- Frames Popup-->
+            <Member name = "1">
+              <Parameter name = "$MACRO_NAME" type = "STRING" value = "Frames Popup"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "SUPACTFRAMES"/>
+              <Parameter name = "$ASSIGN_TYPE" type = "INTEGER" value = "3"/>
+              <Parameter name = "$ASSIGN_ID" type = "INTEGER" value = "1"/>
+            </Member>
+            <Member name = "2">
+              <Parameter name = "$MACRO_NAME" type = "STRING" value = "Frames Popup"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "SUPACTFRAMES"/>
+              <Parameter name = "$ASSIGN_TYPE" type = "INTEGER" value = "2"/>
+              <Parameter name = "$ASSIGN_ID" type = "INTEGER" value = "1"/>
+            </Member>
+            <!-- BMW manual menu MACRO-->
+            <Member name = "3">
+              <Parameter name = "$MACRO_NAME" type = "STRING" value = "BMW ManualMode"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "A01_CMN_MAN"/>
+              <Parameter name = "$ASSIGN_TYPE" type = "INTEGER" value = "2"/>
+              <Parameter name = "$ASSIGN_ID" type = "INTEGER" value = "3"/>
+            </Member>
+            <!-- BMW manual menu killer MACRO-->
+            <Member name = "4">
+              <Parameter name = "$MACRO_NAME" type = "STRING" value = "Kill ManualMode"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "A01_CMN_KILL"/>
+              <Parameter name = "$ASSIGN_TYPE" type = "INTEGER" value = "3"/>
+              <Parameter name = "$ASSIGN_ID" type = "INTEGER" value = "3"/>
+            </Member>
+            <!--Select MAIN MACRO-->
+            <Member name = "6">
+              <Parameter name = "$MACRO_NAME" type = "STRING" value = "SelectMAIN"/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = "SELECTMAIN"/>
+              <Parameter name = "$ASSIGN_TYPE" type = "INTEGER" value = "3"/>
+              <Parameter name = "$ASSIGN_ID" type = "INTEGER" value = "5"/>
+            </Member>
+          </Parameter>
+          <!--TP in PR_CALL-->
+          <Parameter name = "$PRCALL_CONF">
+            <Parameter name = "$CALL_TP_ENB" type = "BOOLEAN" value = "TRUE"/>
+            <Parameter name = "$NUM_KLNAME" type = "INTEGER" value = "10"/>
+          </Parameter>
+          <Parameter name = "$PRCALL_KNAM" type = "ARRAY OF STRING">
+            <!--Setup BMW instruction Menu -->
+            <Member name = "1" type = "STRING" value = "TCH"/>
+            <Member name = "2" type = "STRING" value = "GRP"/>
+            <Member name = "3" type = "STRING" value = "SEARCH_S"/>
+            <Member name = "4" type = "STRING" value = "SCR"/>
+            <Member name = "5" type = "STRING" value = "LRS"/>
+            <Member name = "6" type = "STRING" value = "PAL"/>
+            <Member name = "7" type = "STRING" value = "BRT"/>
+            <Member name = "8" type = "STRING" value = "FBF"/>
+          </Parameter>
+          <!--Parameter name = "$PRCALL_KNAM[1]" type = "STRING" value = "CMN"/-->
+          <!--Remote type (always remote)-->
+          <Parameter name = "$REMOTE_CFG">
+            <Parameter name = "$REMOTE_TYPE" type = "INTEGER" value = "1"/>
+          </Parameter>
+          <!--Menu Favorites Enable-->
+          <Parameter name = "$UI_CONFIG">
+            <Parameter name = "$ENB_MENUFAV" type = "BOOLEAN" value = "FALSE"/>
+            <!--Fctn Favorites Enable-->
+            <Parameter name = "$ENB_FCTNFAV" type = "BOOLEAN" value = "FALSE"/>
+            <!--COORD Favorites Enable-->
+            <Parameter name = "$ENB_COORDFV" type = "BOOLEAN" value = "FALSE"/>
+            <!--User Favorites Enable-->
+            <Parameter name = "$ENB_USERFAV" type = "BOOLEAN" value = "FALSE"/>
+          </Parameter>
+
+          <!--Step mode selected-->
+          <Parameter name = "$SSR">
+            <Parameter name = "$STEPSTMTTYP" type = "INTEGER" value = "3"/>
+          </Parameter>
+
+
+          <!--Logbook-->
+          <Parameter name = "$LOG_BUFF" type = "ARRAY OF STRUCT">
+            <Member name = "1">
+              <Parameter name = "$TITLE" type = "STRING" value = "BMW"/>
+              <Parameter name = "$SIZE" type = "INTEGER" value = "500"/>
+            </Member>
+          </Parameter>
+
+
+
+          <Parameter name = "$REFPOS1" type = "ARRAY OF STRUCT">
+            <!--Tolarence of home positions set to 1 -->
+
+            <Member name = "1">
+              <Parameter name = "$PERCHTOL" type = "ARRAY OF REAL">
+                <Member name = "1" type = "REAL" value = "0.01745329"/>
+                <Member name = "2" type = "REAL" value = "0.01745329"/>
+                <Member name = "3" type = "REAL" value = "0.01745329"/>
+                <Member name = "4" type = "REAL" value = "0.01745329"/>
+                <Member name = "5" type = "REAL" value = "0.01745329"/>
+                <Member name = "6" type = "REAL" value = "0.01745329"/>
+                <Member name = "7" type = "REAL" value = "1.0"/>
+                <Member name = "8" type = "REAL" value = "1.0"/>
+                <Member name = "9" type = "REAL" value = "1.0"/>
+              </Parameter>
+            </Member>
+
+            <Member name = "2">
+              <Parameter name = "$PERCHTOL" type = "ARRAY OF REAL">
+                <Member name = "1" type = "REAL" value = "0.01745329"/>
+                <Member name = "2" type = "REAL" value = "0.01745329"/>
+                <Member name = "3" type = "REAL" value = "0.01745329"/>
+                <Member name = "4" type = "REAL" value = "0.01745329"/>
+                <Member name = "5" type = "REAL" value = "0.01745329"/>
+                <Member name = "6" type = "REAL" value = "0.01745329"/>
+                <Member name = "7" type = "REAL" value = "1.0"/>
+                <Member name = "8" type = "REAL" value = "1.0"/>
+                <Member name = "9" type = "REAL" value = "1.0"/>
+              </Parameter>
+            </Member>
+
+
+            <Member name = "3">
+              <Parameter name = "$PERCHTOL" type = "ARRAY OF REAL">
+                <Member name = "1" type = "REAL" value = "0.01745329"/>
+                <Member name = "2" type = "REAL" value = "0.01745329"/>
+                <Member name = "3" type = "REAL" value = "0.01745329"/>
+                <Member name = "4" type = "REAL" value = "0.01745329"/>
+                <Member name = "5" type = "REAL" value = "0.01745329"/>
+                <Member name = "6" type = "REAL" value = "0.01745329"/>
+                <Member name = "7" type = "REAL" value = "1.0"/>
+                <Member name = "8" type = "REAL" value = "1.0"/>
+                <Member name = "9" type = "REAL" value = "1.0"/>
+              </Parameter>
+            </Member>
+
+
+            <Member name = "4">
+              <Parameter name = "$PERCHTOL" type = "ARRAY OF REAL">
+                <Member name = "1" type = "REAL" value = "0.01745329"/>
+                <Member name = "2" type = "REAL" value = "0.01745329"/>
+                <Member name = "3" type = "REAL" value = "0.01745329"/>
+                <Member name = "4" type = "REAL" value = "0.01745329"/>
+                <Member name = "5" type = "REAL" value = "0.01745329"/>
+                <Member name = "6" type = "REAL" value = "0.01745329"/>
+                <Member name = "7" type = "REAL" value = "1.0"/>
+                <Member name = "8" type = "REAL" value = "1.0"/>
+                <Member name = "9" type = "REAL" value = "1.0"/>
+              </Parameter>
+            </Member>
+
+
+            <Member name = "5">
+              <Parameter name = "$PERCHTOL" type = "ARRAY OF REAL">
+                <Member name = "1" type = "REAL" value = "0.01745329"/>
+                <Member name = "2" type = "REAL" value = "0.01745329"/>
+                <Member name = "3" type = "REAL" value = "0.01745329"/>
+                <Member name = "4" type = "REAL" value = "0.01745329"/>
+                <Member name = "5" type = "REAL" value = "0.01745329"/>
+                <Member name = "6" type = "REAL" value = "0.01745329"/>
+                <Member name = "7" type = "REAL" value = "1.0"/>
+                <Member name = "8" type = "REAL" value = "1.0"/>
+                <Member name = "9" type = "REAL" value = "1.0"/>
+              </Parameter>
+            </Member>
+          </Parameter>
+          <Parameter name = "$XVRCFG">
+            <Parameter name = "$PROT_OVRD" type = "BOOLEAN" value = "TRUE"/>
+          </Parameter>
+
+          <!--Payload ID Config-->
+          <Parameter name ="$PLID_CFG">
+            <Parameter name ="$COMP_SWITCH" type = "BitWiseOR" value = "4"/>
+          </Parameter>
+
+          <!--Deactive automatically PNIO stations in case not reachable station was tried to activate-->
+          <Parameter name ="$PNG2_CFG2">
+            <Parameter name ="$USHORT6" type = "BitWiseOR" value = "15"/>
+          </Parameter>
+
+          <!-- Enable USB password function-->
+          <Parameter name = "$PASSWORD">
+            <Parameter name = "$ENB_PCMPWD" type = "BOOLEAN" value = "TRUE"/>
+          </Parameter>
+
+          <!-- Disable LOG_DCS function-->
+          <Parameter name = "$LOG_DCS">
+            <Parameter name = "$ENABLE" type = "INTEGER" value = "0"/>
+            <!-- Set IO for LOG_DCS function to virtual rack and index 520-->
+            <Parameter name = "$OUTPUT_IDX" type = "INTEGER" value = "520"/>
+          </Parameter>
+
+        </External>
+      </LoadOrder>
+
+      <DeleteOrder>
+        <!--additional files-->
+        <File name = "A01_cmn_err.CSV" comment = "" location = "FR:" type = "CSV"/>
+        <File name = "A01.XML" comment = "" location = "FR:" type = "XML"/>
+        <File name = "SupBMWManBut.XML" comment = "" location = "FR:" type = "XML"/>
+        <File name = "Exit.gif" comment = "" location = "FR:\gif\" type = "GIF"/>
+        <File name = "Logo.gif" comment = "" location = "FR:\gif\" type = "GIF"/>
+        <File name = "Null.gif" comment = "" location = "FR:\gif\" type = "GIF"/>
+        <File name = "Next.gif" comment = "" location = "FR:\gif\" type = "GIF"/>
+        <File name = "dot.xml" comment = "" location = "FR:" type = "XML"/>
+
+        <!--argument wizard-->
+        <File name = "ARGDISPEG01.dt" location = "FR:" comment = "ARGDISPEG01" type = "DT"/>
+        <File name = "ARGDISPGR01.dt" location = "FR:" comment = "ARGDISPEG01" type = "DT"/>
+
+        <!--TP programs-->
+        <File name = "ABORTHOME_1" location = "MD:" comment ="ABORTHOME_1" type = "TP"/>
+        <File name = "ABORTHOME_2" location = "MD:" comment ="ABORTHOME_2" type = "TP"/>
+        <File name = "ABORTHOME_3" location = "MD:" comment ="ABORTHOME_3" type = "TP"/>
+        <File name = "ABORTHOME_4" location = "MD:" comment ="ABORTHOME_4" type = "TP"/>
+        <File name = "ABORTHOME_5" location = "MD:" comment ="ABORTHOME_5" type = "TP"/>
+        <File name = "GO_HOME" location = "MD:" comment ="GO_HOME" type = "TP"/>
+        <File name = "INIT_AFTER_HOME" location = "MD:" comment ="INIT_AFTER_HOME" type = "TP"/>
+        <File name = "INIT_BEFORE_HOME" location = "MD:" comment ="INIT_BEFORE_HOME" type = "TP"/>
+        <File name = "INIT_PRODUCTION" location = "MD:" comment ="INIT_PRODUCTION" type = "TP"/>
+        <File name = "INITAPP" location = "MD:" comment ="INITAPP" type = "TP"/>
+        <File name = "INITPROGRAM" location = "MD:" comment ="INITPROGRAM" type = "TP"/>
+        <File name = "MAIN" location = "MD:" comment ="MAIN" type = "TP"/>
+        <File name = "PROG251" location = "MD:" comment ="PROG251" type = "TP"/>
+
+        <!--application files-->
+        <File name = "A01_cmn_kill" comment = "A01_cmn_kill" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_bck_rout" location = "MD:" comment ="BMW BACKUP" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_bck_task" location = "MD:" comment ="BACKUP TASK" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_bck_vers" location = "MD:" comment ="BACKUP VERSION" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "PNPED9utilW" location = "MD:" comment ="OLP IMPORT" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "PNPED9mainW" location = "MD:" comment ="OLP IMPORT" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_zip_rout" location = "MD:" comment ="OLP IMPORT" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "CMN" comment = "CMN" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "CMN_P" comment = "CMN_P" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "TaskATPOff" comment = "TaskATPOff" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "SelectMain" comment = "SelectMain" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "MessageDisp" comment = "MessageDisp" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "MessageDispM.pc" location = "MD:" comment ="MessageDispM" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "ComLubri" comment = "ComLubri" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "BreakTest" comment = "BreakTest" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_cmn_lub" comment = "A01_cmn_lub" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_cmn_gui" comment = "A01_cmn_gui" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "SUPAPPLIST" comment = "SUPAPPLIST" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "SUPSETUPMENU" comment = "SUPSETUPMENU" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "SUPSTATMENU" comment = "SUPSTATMENU" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_cmn_menu" comment = "A01_cmn_menu" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_cmn_man" comment = "A01_cmn_man" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_cmn_mon" comment = "A01_cmn_mon" location = "MD:" type = "KAREL" monitoring = "TRUE"/>
+        <File name = "A01_cmn_Ev" comment = "A01_cmn_Ev" location = "MD:" type = "KAREL" monitoring = "TRUE"/>
+        <File name = "cmn_InitAuto" comment = "cmn_InitAuto" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "Lib_UDP" comment = "Lib_UDP" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "SendUDPT" comment = "SendUDPT" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "supactframes" comment = "supactframes" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_cmn_rout" comment = "A01_cmn_rout" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_cmn_err" comment = "A01_cmn_err" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "A01_cmn_var" comment = "A01_cmn_var" location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+
+
+        <!--application VR files-->
+        <File name = "back" location = "MD:" comment = "MSGO" type = "VARIABLE"/>
+        <File name = "backgr" location = "MD:" comment = "MSGO" type = "VARIABLE"/>
+        <File name = "CMN" comment = "CMN.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "CMN_P" comment = "CMN_P.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "ClearRegister " comment ="ClearRegister " location = "MD:" type = "KAREL" monitoring = "FALSE"/>
+        <File name = "TaskATPOn" comment = "TaskATPOn.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "TaskATPOff" comment = "TaskATPOff.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "SelectMain" comment = "SelectMain.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "MessageDisp" comment = "MessageDisp.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "ComLubri" comment = "ComLubri.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "BreakTest" comment = "BreakTest.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "A01_cmn_lub" comment = "A01_cmn_lub.vr" location  = "MD:" type = "VARIABLE"/>
+        <File name = "A01_cmn_gui" comment = "A01_cmn_gui.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "SUPAPPLIST" comment = "SUPAPPLIST.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "SUPSETUPMENU" comment = "SUPSETUPMENU.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "SUPSTATMENU" comment = "SUPSTATMENU.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "A01_cmn_menu" comment= "A01_cmn_menu.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "A01_bck_rout" comment= "A01_bck_rout.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "A01_bck_vers" comment= "A01_bck_vers.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "A01_cmn_kill" comment = "A01_cmn_kill.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "A01_cmn_Ev" comment = "A01_cmn_Ev.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "Lib_UDP" comment = "Lib_UDP.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "A01_cmn_man" comment = "A01_cmn_man.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "A01_cmn_mon" comment = "A01_cmn_mon.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "cmn_InitAuto" comment= "cmn_InitAuto.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "SendUDPT" comment = "SendUDPT.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "XML_lib" comment = "XML_lib.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "A01_cmn_rout" comment = "A01_cmn_rout.vr" location= "MD:" type = "VARIABLE"/>
+        <File name = "A01_cmn_err" comment = "A01_cmn_err.vr" location = "MD:" type = "VARIABLE"/>
+        <File name = "A01_cmn_var" comment = "A01_cmn_var.vr" location = "MD:" type = "VARIABLE"/>
+
+
+        <!--dictionary files-->
+        <File name = "GUIE" location = "MD:" comment = "GUIE" type = "VARIABLE"/>
+        <File name = "Home" location = "MD:" comment = "Home" type = "VARIABLE"/>
+        <File name = "MSGO" location = "MD:" comment = "MSGO" type = "VARIABLE"/>
+        <File name = "back" location = "MD:" comment = "BACK" type = "VARIABLE"/>
+        <File name = "olpl" location = "MD:" comment = "OLPL" type = "VARIABLE"/>
+        <File name = "GUIE" location = "MD:" comment ="GUIE" type = "DICTIONARY"/>
+        <File name = "Home" location = "MD:" comment ="Home" type = "DICTIONARY"/>
+        <File name = "MSGO" location = "MD:" comment ="MSGO" type = "DICTIONARY"/>
+        <File name = "BACK" location = "MD:" comment ="BACK" type = "DICTIONARY"/>
+        <File name = "OLPL" location = "MD:" comment ="OLPL" type = "DICTIONARY"/>
+
+
+
+
+
+        <!--system variable settings-->
+
+
+
+
+        <External name = "[*SYSTEM*]">
+          <!--karel background tasks-->
+          <Parameter name = "$KRLCFG" type = "ARRAY OF STRUCT">
+            <Member name = "1">
+              <Parameter name = "$PROG_NAME" type = "STRING" value = ""/>
+              <Parameter name = "$AUTOSTART" type = "BOOLEAN" value = "FALSE"/>
+              <Parameter name = "$STAT_ENB" type = "BOOLEAN" value = "FALSE"/>
+              <Parameter name = "$DO1_NUM" type = "INTEGER" value = "0"/>
+              <Parameter name = "$DO2_NUM" type = "INTEGER" value = "0"/>
+              <Parameter name = "$MODESET" type = "INTEGER" value = "1"/>
+              <Parameter name = "$OUTPUT_ALM" type = "BOOLEAN" value = "FALSE"/>
+            </Member>
+          </Parameter>
+
+          <Parameter name = "$CUSTOMMENU" type = "ARRAY OF STRUCT">
+            <!--Setup BMW instruction Menu -->
+            <Member name = "5">
+              <Parameter name ="$TITLE" type = "STRING" value = ""/>
+              <Parameter name ="$PROG_NAME" type = "STRING" value = ""/>
+            </Member>
+            <Member name = "11">
+              <Parameter name = "$TITLE" type = "STRING" value = ""/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = ""/>
+            </Member>
+            <Member name = "21">
+              <Parameter name = "$TITLE" type = "STRING" value = ""/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = ""/>
+              <Parameter name = "$OPTION" type = "INTEGER" value = "0"/>
+            </Member>
+            <!--Setup BMW instruction Menu -->
+            <Member name = "30">
+              <Parameter name ="$TITLE" type = "STRING" value = ""/>
+              <Parameter name ="$PROG_NAME" type = "STRING" value = ""/>
+              <Parameter name = "$OPTION" type = "INTEGER" value = "0"/>
+            </Member>
+            <Member name = "31">
+              <Parameter name ="$TITLE" type = "STRING" value = ""/>
+              <Parameter name ="$PROG_NAME" type = "STRING" value = ""/>
+              <Parameter name = "$OPTION" type = "INTEGER" value = "0"/>
+            </Member>
+          </Parameter>
+
+          <!--Setup program selection method -->
+          <Parameter name = "$SHELL_WRK">
+            <Parameter name = "$CUST_NAME" type = "STRING" value = ""/>
+          </Parameter>
+          <Parameter name = "$SHELL_CFG">
+            <Parameter name = "$SEL_TYPE" type = "INTEGER" value = "0"/>
+          </Parameter>
+
+
+
+          <Parameter name = "$MACROTABLE" type = "ARRAY OF STRUCT">
+            <!-- BMW manual menu MACRO-->
+            <Member name = "3">
+              <Parameter name = "$MACRO_NAME" type = "STRING" value = ""/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = ""/>
+              <Parameter name = "$ASSIGN_TYPE" type = "INTEGER" value = "0"/>
+              <Parameter name = "$ASSIGN_ID" type = "INTEGER" value = "0"/>
+            </Member>
+            <!-- BMW manual menu killer MACRO-->
+            <Member name = "4">
+              <Parameter name = "$MACRO_NAME" type = "STRING" value = ""/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = ""/>
+              <Parameter name = "$ASSIGN_TYPE" type = "INTEGER" value = "0"/>
+              <Parameter name = "$ASSIGN_ID" type = "INTEGER" value = "0"/>
+            </Member>
+            <!--Select MAIN MACRO-->
+            <Member name = "6">
+              <Parameter name = "$MACRO_NAME" type = "STRING" value = ""/>
+              <Parameter name = "$PROG_NAME" type = "STRING" value = ""/>
+              <Parameter name = "$ASSIGN_TYPE" type = "INTEGER" value = "0"/>
+              <Parameter name = "$ASSIGN_ID" type = "INTEGER" value = "0"/>
+            </Member>
+          </Parameter>
+        </External>
+      </DeleteOrder>
+
+      <!--Translations-->
+      <!--Example:-->
+      <!--Translation old = "[A01_cmn_var]strukturA[3].VarNameOld" new = "[A01_cmn_var]strukturB[12].VarNameNew" /-->
+      <!--Translation old = "[A01_cmn_mon]VarA" new = "[A01_cmn_var]VarB" /-->
+
+      <!--non adjustable constants-->
+      <Const>
+
+      </Const>
+      <!--If cell has a rail unit then TRUE (need to set by the tool)-->
+      <Parameter name ="b_RailUnit" type = "BOOLEAN"  default = "FALSE"/>
+      <!--UDP parameter (need to set by the tool)-->
+      <Parameter name ="st_UDPAdr" type = "STRING"  default = ""/>
+      <Parameter name ="st_Port" type = "STRING"  default = "9000"/>
+      <!--If the cell uses 2 PLC for collision zones then TRUE  (need to set by the tool)-->
+      <Parameter name ="b_PLC2" type = "BOOLEAN"  default = "FALSE"/>
+    </Version>
+  </Application>
+</Blueprint>
